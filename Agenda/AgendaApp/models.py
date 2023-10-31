@@ -10,7 +10,7 @@ class Contato(models.Model):
     nome = models.CharField(max_length=200)
     apelido = models.CharField(max_length=30)
     email = models.EmailField(max_length=100)
-    data_nascimento = models.DateField(verbose_name='Data de Nascimento')
+    data_nascimento = models.DateField(verbose_name='Data de Nascença')
     endereco = models.CharField(max_length=200, verbose_name='Endereço')
     numero = models.CharField(max_length=10)
     complemento = models.CharField(max_length=50, blank=True, null=True)
