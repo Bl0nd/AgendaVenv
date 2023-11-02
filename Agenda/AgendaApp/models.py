@@ -1,6 +1,15 @@
 from django.db import models
 
+UFS = [('SP','São Paulo'),('RJ','Rio de janeiro'),('MG','Minas Gerais'),('ES','Espirito Santo')]
+
 # Create your models here.
+class Cidade(models.Model):
+    nome = models.CharField(max_length=50)
+    uf = models.CharField(max_length=2,choices=UFS)
+
+    def __str__(self):
+        return self.nome
+    
 class Contato(models.Model):
 
 #Opções do campo Estado Civil
@@ -16,7 +25,7 @@ class Contato(models.Model):
     complemento = models.CharField(max_length=50, blank=True, null=True)
     cep = models.CharField(max_length=9)
     bairro = models.CharField(max_length=100)
-    cidade = models.CharField(max_length=100)
+    cidade =  models.ForeignKey(Cidade, on_delete=models.CASCADE)
     estado = models.CharField(max_length=50)
     estado_civis = models.CharField(max_length=1, choices=ESTADO_CIVIS, null=True)
 
@@ -28,8 +37,18 @@ class Contato(models.Model):
         verbose_name = 'Pessoa'
         verbose_name_plural = 'Pessoas'
 
+class Telefone(models.Model):
+    TIPOS_TELEFONE = [
+        ('RES','Residencial'), ('Com','Comercial'), ('REC','Recado'),
+    ]
+    contato = models.ForeignKey(Contato,on_delete=models.CASCADE)
+    ddd = models.IntegerField(max_length=2)
+    numero = models.CharField(max_length=10)
+    tipo = models.CharField(max_length=3,choices=TIPOS_TELEFONE)
+    EhWhatsApp = models.BooleanField(verbose_name="Tem WhatsApp ?")
 
-
+def __str__(self):
+    return f'({self.ddd}) {self.numero}'
 
 
 
