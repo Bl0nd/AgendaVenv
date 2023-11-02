@@ -5,6 +5,7 @@ UFS = [
     ]
 
 # Create your models here.
+
 class Cidade(models.Model):
     nome = models.CharField(max_length=50)
     uf = models.CharField(max_length=2,choices=UFS)
@@ -42,6 +43,7 @@ class Contato(models.Model):
         verbose_name_plural = 'Pessoas'
 
 class Telefone(models.Model):
+
     TIPOS_TELEFONE = [
         ('RES','Residencial'),('COM','Comercial'),('REC','Recado'),
     ]
