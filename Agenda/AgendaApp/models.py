@@ -1,6 +1,8 @@
 from django.db import models
 
-UFS = [('SP','São Paulo'),('RJ','Rio de janeiro'),('MG','Minas Gerais'),('ES','Espirito Santo')]
+UFS = [
+    ('SP','São Paulo'),('RJ','Rio de janeiro'),('MG','Minas Gerais'),('ES','Espirito Santo'),
+    ]
 
 # Create your models here.
 class Cidade(models.Model):
@@ -14,7 +16,9 @@ class Contato(models.Model):
 
 #Opções do campo Estado Civil
 #Primeiro valor da tupla é oq vai no banco, o segunda mostra na tela
-    ESTADO_CIVIS = [('S','Solteiro'), ('C','Casado'), ('D','Divorciado'), ('V','Viúvo')]
+    ESTADO_CIVIS = [
+        ('S','Solteiro'),('C','Casado'),('D','Divorciado'),('V','Viúvo'),
+        ]
 
     nome = models.CharField(max_length=200)
     apelido = models.CharField(max_length=30)
@@ -39,8 +43,9 @@ class Contato(models.Model):
 
 class Telefone(models.Model):
     TIPOS_TELEFONE = [
-        ('RES','Residencial'), ('Com','Comercial'), ('REC','Recado'),
+        ('RES','Residencial'),('COM','Comercial'),('REC','Recado'),
     ]
+
     contato = models.ForeignKey(Contato,on_delete=models.CASCADE)
     ddd = models.IntegerField(max_length=2)
     numero = models.CharField(max_length=10)
