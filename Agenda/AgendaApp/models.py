@@ -12,6 +12,12 @@ class Cidade(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Interesse(models.Model):
+    nome = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.nome   
     
 class Contato(models.Model):
 
@@ -33,6 +39,7 @@ class Contato(models.Model):
     cidade =  models.ForeignKey(Cidade, on_delete=models.CASCADE)
     estado = models.CharField(max_length=50)
     estado_civis = models.CharField(max_length=1, choices=ESTADO_CIVIS, null=True)
+    interesses = models.ManyToManyField(Interesse)
 
     def __str__(self):
         return self.nome
@@ -49,18 +56,12 @@ class Telefone(models.Model):
     ]
 
     contato = models.ForeignKey(Contato,on_delete=models.CASCADE)
-    ddd = models.IntegerField(max_length=2)
+    ddd = models.IntegerField()
     numero = models.CharField(max_length=10)
     tipo = models.CharField(max_length=3,choices=TIPOS_TELEFONE)
     EhWhatsApp = models.BooleanField(verbose_name="Tem WhatsApp ?")
 
 def __str__(self):
     return f'({self.ddd}) {self.numero}'
-
-
-
-
-    
-
 
 
